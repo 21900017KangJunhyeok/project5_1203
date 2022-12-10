@@ -17,6 +17,7 @@ public class BoardDAO {
 @Autowired
     SqlSession sqlSession;
 
+
     private final String BOARD_INSERT = "insert into Board2(name, card, content, price, installment) values (?,?,?,?,?)";
     private final String BOARD_UPDATE = "update Board2 set name =?, card=?, content=?, price=?, installment=? where seq=?";
     private final String BOARD_DELETE = "delete from Board2 where seq=?";
