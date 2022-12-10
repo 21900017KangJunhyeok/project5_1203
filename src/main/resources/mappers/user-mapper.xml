@@ -6,4 +6,5 @@
         where userid=#{userid} and password=#{password}
     </select>
 
+
 </mapper>
