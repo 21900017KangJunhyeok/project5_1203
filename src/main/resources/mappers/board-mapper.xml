@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Board">
+    <insert id="insertBoard">
+        insert into Board2 (card, name, content, price,installment)
+        values
+        (#{card} , #{name} , #{price} , #{content},#{intallment})
+    </insert>
+    <update id="updateBoard">
+        update Board2
+        set card=#{card}, content=#{content},name =#{name}, price=#{price}, installment=#{installment}
+        where seq=#{seq}
+    </update>
+    <delete id="deleteBoard">
+        delete from Board2 where seq=#{seq}
+    </delete>
+    <select id="getBoard" resultType="board">
+        select * from Board2 where seq=#{seq}
+    </select>
+    <select id="getBoardList" resultType="board">
+        select * from Board2 order by seq desc
+    </select>
+</mapper>

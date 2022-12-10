@@ -12,22 +12,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class BoardController {
 
     @Autowired
-    BoardDAO boardDAO;
-
-
+    BoardService boardService;
     @RequestMapping(value = "list",method = RequestMethod.GET)
-    public String boardlist(Model model){
-        model.addAttribute("list",boardDAO.getBoardList());
+    public String boardlist(Model model) {
+        model.addAttribute("list",
+                boardService.getBoardList());
         return "board/posts";
     }
-    @RequestMapping(value = "add",method = RequestMethod.GET)
-    public String addPost(){
+    @RequestMapping(value = "add",
+            method = RequestMethod.GET)
+    public String addPost() {
         return "board/addpostform";
     }
-
     @RequestMapping(value = "addok",method = RequestMethod.POST)
     public String addPostOK(BoardVO vo){
-        int i=boardDAO.insertBoard(vo);
+        int i=boardService.insertBoard(vo);
         if(i==0)
             System.out.println("데이터 추가 실패ㅜㅜ");
         else System.out.println("데이터 추가 성공^^");
@@ -36,13 +35,13 @@ public class BoardController {
     }
     @RequestMapping(value = "edit/{id}",method = RequestMethod.GET)
     public String editPost(@PathVariable("id") int id, Model model){
-        BoardVO boardVO = boardDAO.getBoard(id);
+        BoardVO boardVO = boardService.getBoard(id);
         model.addAttribute("boardVO",boardVO);
         return "board/editform";
     }
     @RequestMapping(value = "editok",method = RequestMethod.POST)
     public String boardEditOk(BoardVO vo){
-        int i = boardDAO.updateBoard(vo);
+        int i = boardService.updateBoard(vo);
         if(i==0)
             System.out.println("데이터 수정 실패ㅜㅜ");
         else
@@ -51,13 +50,14 @@ public class BoardController {
     }
     @RequestMapping(value = "deleteok/{id}", method = RequestMethod.GET)
     public String deletePost(@PathVariable("id") int id){
-        int i=boardDAO.deleteBoard(id);
+        int i=boardService.deleteBoard(id);
         if(i==0)
             System.out.println("데이터 삭제 실패ㅜㅜ");
         else
             System.out.println("데이터 삭제 성공^^");
         return "redirect:../list";
     }
+
 
 
 }
